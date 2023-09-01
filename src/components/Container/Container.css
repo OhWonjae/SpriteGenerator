@@ -1,0 +1,12 @@
+.container {
+    padding:10px;
+    min-height: 600px;
+    min-width:1000px
+}
+
+.container > .container-title{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
