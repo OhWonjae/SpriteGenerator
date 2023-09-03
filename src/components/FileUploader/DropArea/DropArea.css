@@ -1,0 +1,32 @@
+.drop-area {
+    width: 100%;
+    height: 70%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.uploader-img{
+    text-align: center;
+    font-size:2rem;
+}
+
+.uploader-img > img{
+    width:100px;
+    height:100px;
+}
+
+.drop-area #file {
+    display: none;
+}
+
+.btn-upload {
+    margin-top: 2px;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+
+
+
