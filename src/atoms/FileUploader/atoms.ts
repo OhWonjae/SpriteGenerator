@@ -1,2 +1,3 @@
 import { atom } from 'jotai';
-export const FilesAtom = atom<File[]>([]);
+import { Attachment } from '@/types/common';
+export const FilesAtom = atom<Attachment[]>([]);

@@ -2,7 +2,8 @@ import './DropArea.css';
 import uploaderImg from '/public/assets/uploader_icon.png';
 import { FilesAtom } from '@/atoms/FileUploader/atoms';
 import { useAtom } from 'jotai';
-import { ChangeEvent, useEffect, useRef } from 'react';
+import { ChangeEvent } from 'react';
+import { v4 } from 'uuid';
 export const DropArea = () => {
   const [files, setFiles] = useAtom(FilesAtom);
 
@@ -17,12 +18,17 @@ export const DropArea = () => {
     return false;
   };
   const handleOnFileList = (e: ChangeEvent<HTMLInputElement>) => {
-    const arr = [...e.target.files] as File[];
+    const arr = [...e.target.files] as Attachment[];
+    for (const file of arr) {
+      const id = v4();
+      file.id = id;
+    }
     setFiles((files) => [...files, ...arr]);
+    e.target.value = '';
   };
   return (
     <div
-      className={'drop-area'}
+      className={files.length > 0 ? 'drop-area' : 'drop-area-empty'}
       onDrop={(e) => {
         e.preventDefault();
         for (let i = 0; i < e.dataTransfer.files.length; i++) {
@@ -31,8 +37,14 @@ export const DropArea = () => {
             return;
           }
         }
+        console.log('dropEvnet', [...files, ...e.dataTransfer.files]);
+        const arr = [...e.dataTransfer.files] as Attachment[];
+        for (const file of arr) {
+          const id = v4();
+          file.id = id;
+        }
         setFiles((f) => {
-          return [...f, ...e.dataTransfer.files];
+          return [...f, ...arr];
         });
       }}
       onDragOver={(e) => {

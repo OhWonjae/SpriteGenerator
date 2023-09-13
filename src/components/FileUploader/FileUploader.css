@@ -1,4 +1,5 @@
 .file-uploader {
+    box-sizing: border-box;
     border-right: black solid 1px;
     float: left;
     width: 50%;
