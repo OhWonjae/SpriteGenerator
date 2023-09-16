@@ -15,7 +15,9 @@ export const SpriteArea = () => {
       const img = await LoadImage(BlobUrl);
       images.push(img);
     }
-    LocateSprite(ctx, images);
+    ctx.canvas.width = 1076;
+    ctx.canvas.height = 600;
+    LocateSprite(1076, 600, ctx, images);
   };
 
   useEffect(() => {
