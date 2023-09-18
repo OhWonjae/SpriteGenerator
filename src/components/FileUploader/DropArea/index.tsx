@@ -4,6 +4,7 @@ import { FilesAtom } from '@/atoms/FileUploader/atoms';
 import { useAtom } from 'jotai';
 import { ChangeEvent } from 'react';
 import { v4 } from 'uuid';
+import { Attachment } from '@/types/common';
 export const DropArea = () => {
   const [files, setFiles] = useAtom(FilesAtom);
 

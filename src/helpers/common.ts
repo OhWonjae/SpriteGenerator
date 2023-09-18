@@ -227,24 +227,16 @@ function DivideSpace(
     h: target.y - container.y,
   };
   if (right.w > 0 && right.h > 0) {
-    if (!isIncludeContainer(linkedListRef, right)) {
-      linkedListRef.append(right);
-    }
+    linkedListRef.append(right);
   }
   if (bottom.w > 0 && bottom.h > 0) {
-    if (!isIncludeContainer(linkedListRef, bottom)) {
-      linkedListRef.append(bottom);
-    }
+    linkedListRef.append(bottom);
   }
   if (left.w > 0 && left.h > 0) {
-    if (!isIncludeContainer(linkedListRef, left)) {
-      linkedListRef.append(left);
-    }
+    linkedListRef.append(left);
   }
   if (top.w > 0 && top.h > 0) {
-    if (!isIncludeContainer(linkedListRef, top)) {
-      linkedListRef.append(top);
-    }
+    linkedListRef.append(top);
   }
   linkedListRef.traverse();
   console.log('---------------------------------------------------------');
@@ -292,6 +284,7 @@ export function LocateSprite(
   initCanvasHeight: number,
   _ctx: CanvasRenderingContext2D,
   images: HTMLImageElement[],
+  bg: HTMLImageElement,
 ) {
   let ctx = _ctx;
   let canvasWidth = initCanvasWidth;
@@ -314,9 +307,11 @@ export function LocateSprite(
           '맞는 영역은 없는데 다른 나눠진 영역중 캔버스의 width와 height를 조절하면 되는경우 ---------------------------------------------------',
         );
       }
-
+      console.log('ccc', container, canvasWidth, canvasHeight, target);
       if (
         container &&
+        container.x + container.w === canvasWidth &&
+        container.y + container.h === canvasHeight &&
         container.x + target.w > canvasWidth &&
         container.y + target.h > canvasHeight
       ) {
@@ -327,20 +322,25 @@ export function LocateSprite(
         container.w = target.w;
         container.h = target.h;
         // 여기서 새로 추가된 부분 영역 잡아주기
-        const tmpRect1 = {
-          x: 0,
-          y: canvasHeight,
-          w: canvasWidth,
-          h: container.y + target.h - canvasHeight,
-        };
-        linkedList.append(tmpRect1);
-        const tmpRect2 = {
-          x: canvasWidth,
-          y: 0,
-          w: container.x + target.w - canvasWidth,
-          h: container.y,
-        };
-        linkedList.append(tmpRect2);
+        if (container.x > 0) {
+          const tmpRect1 = {
+            x: 0,
+            y: canvasHeight,
+            w: container.x,
+            h: container.y + target.h - canvasHeight,
+          };
+          linkedList.append(tmpRect1);
+        }
+        if (container.y > 0) {
+          const tmpRect2 = {
+            x: canvasWidth,
+            y: 0,
+            w: container.x + target.w - canvasWidth,
+            h: container.y,
+          };
+          linkedList.append(tmpRect2);
+        }
+
         canvasWidth = container.x + target.w;
         canvasHeight = container.y + target.h;
 
@@ -353,87 +353,134 @@ export function LocateSprite(
         target.y = container.y;
       } else if (
         container &&
-        container.x + target.w > canvasWidth &&
-        container.y + target.h <= container.h
+        container.x + container.w === canvasWidth &&
+        container.x + target.w > canvasWidth
       ) {
         ctx.canvas.style.width = container.x + target.w + 'px';
         ctx.canvas.width = container.x + target.w;
         container.w = target.w;
-        const tmpRect1 = {
-          x: canvasWidth,
-          y: 0,
-          w: container.x + target.w - canvasWidth,
-          h: container.y,
-        };
-        linkedList.append(tmpRect1);
-        const tmpRect2 = {
-          x: canvasWidth,
-          y: target.y + target.h,
-          w: container.x + target.w - canvasWidth,
-          h: canvasHeight - (container.y + target.h),
-        };
-        linkedList.append(tmpRect2);
+        if (container.y > 0) {
+          const tmpRect1 = {
+            x: canvasWidth,
+            y: 0,
+            w: container.x + target.w - canvasWidth,
+            h: container.y,
+          };
+          linkedList.append(tmpRect1);
+        }
+        if (container.y + target.h < canvasHeight) {
+          const tmpRect2 = {
+            x: canvasWidth,
+            y: target.y + target.h,
+            w: container.x + target.w - canvasWidth,
+            h: canvasHeight - (container.y + container.w),
+          };
+          linkedList.append(tmpRect2);
+        }
+
         canvasWidth = container.x + target.w;
         console.log(
           '추가하는 이미지가 canvas의 너비만 클때 캔버스 너비 ',
-          container.w,
+          container,
         );
         target.x = container.x;
         target.y = container.y;
       } else if (
         container &&
-        container.x + target.w <= container.w &&
+        container.y + container.h === canvasHeight &&
         container.y + target.h > canvasHeight
       ) {
         ctx.canvas.style.height = container.y + target.h + 'px';
         ctx.canvas.height = container.y + target.h;
         container.h = target.h;
-        const tmpRect1 = {
-          x: 0,
-          y: canvasHeight,
-          w: container.x,
-          h: container.y + target.h - canvasHeight,
-        };
-        linkedList.append(tmpRect1);
-        const tmpRect2 = {
-          x: target.x + target.w,
-          y: canvasHeight,
-          w: canvasWidth,
-          h: container.y + target.h - canvasHeight,
-        };
-        linkedList.append(tmpRect2);
+        if (container.x > 0) {
+          const tmpRect1 = {
+            x: 0,
+            y: canvasHeight,
+            w: container.x,
+            h: container.y + target.h - canvasHeight,
+          };
+          linkedList.append(tmpRect1);
+        }
+        if (container.x + target.w < canvasWidth) {
+          const tmpRect2 = {
+            x: target.x + target.w,
+            y: canvasHeight,
+            w: canvasWidth - (container.x + target.w),
+            h: container.y + target.h - canvasHeight,
+          };
+          linkedList.append(tmpRect2);
+        }
+
         canvasHeight = container.y + target.h;
         console.log(
           '추가하는 이미지가 canvas의 높이만 클때 캔버스 너비 ',
-          container.h,
+          container,
         );
         target.x = container.x;
         target.y = container.y;
       } else {
         // 추가적인 컨테이너 공간이 없을때
-        ctx.canvas.style.width = canvasWidth + target.w + 'px';
-        ctx.canvas.width = canvasWidth + target.w;
-        const newRect = {
-          x: canvasWidth,
+        let newRect = {
+          x: 0,
           y: 0,
-          w: target.w,
-          h: canvasHeight,
+          w: 0,
+          h: 0,
         };
-        if (canvasHeight < target.h) {
+        // 추가되는 이미지의 height가 width보다 클때
+        if (target.w < target.h) {
+          console.log('추가되는 이미지의 height가 width보다 클때');
+          ctx.canvas.style.width = canvasWidth + target.w + 'px';
+          ctx.canvas.width = canvasWidth + target.w;
+          newRect = {
+            x: canvasWidth,
+            y: 0,
+            w: target.w,
+            h: canvasHeight,
+          };
+          if (canvasHeight < target.h) {
+            ctx.canvas.style.height = target.y + target.h + 'px';
+            ctx.canvas.height = target.y + target.h;
+            newRect.h = target.h;
+            // 여기서 새로 추가된 부분 영역 잡아주기
+            const tmpRect = {
+              x: 0,
+              y: canvasHeight,
+              w: canvasWidth + target.w,
+              h: target.h - canvasHeight,
+            };
+            linkedList.append(tmpRect);
+            canvasHeight = target.y + target.h;
+          }
+          canvasWidth = canvasWidth + target.w;
+        } else {
+          console.log('추가되는 이미지의 width가 height보다 클때');
           ctx.canvas.style.height = canvasHeight + target.h + 'px';
           ctx.canvas.height = canvasHeight + target.h;
-          newRect.h = target.h;
-          // 여기서 새로 추가된 부분 영역 잡아주기
-          const tmpRect = {
+          newRect = {
             x: 0,
             y: canvasHeight,
             w: canvasWidth,
-            h: target.h - canvasHeight,
+            h: target.h,
           };
-          linkedList.append(tmpRect);
+          if (canvasWidth < target.w) {
+            ctx.canvas.style.width = target.x + target.w + 'px';
+            ctx.canvas.width = target.x + target.w;
+            newRect.w = target.w;
+            // 여기서 새로 추가된 부분 영역 잡아주기
+            const tmpRect = {
+              x: canvasWidth,
+              y: 0,
+              w: target.w - canvasWidth,
+              h: canvasHeight + target.h,
+            };
+            linkedList.append(tmpRect);
+            canvasWidth = target.x + target.w;
+          }
+
+          canvasHeight = canvasHeight + target.h;
         }
-        canvasWidth = canvasWidth + target.w;
-        canvasHeight = canvasHeight + target.h;
+
         linkedList.append(newRect);
         container = newRect;
         console.log(
@@ -445,6 +492,7 @@ export function LocateSprite(
         target.y = container.y;
       }
       const newCanvasCtx = ctx.canvas.getContext('2d');
+      newCanvasCtx.drawImage(bg, 0, 0, canvasWidth, canvasHeight);
       newCanvasCtx.putImageData(prevCtxImageData, 0, 0);
       ctx = newCanvasCtx;
     } else {
@@ -454,6 +502,7 @@ export function LocateSprite(
 
     // 선택된 container 에 이미지에 따른 영역 나누고 캔버스에 그리기
     console.log('before DivideSpace', target, container);
+
     DivideSpace(linkedList, target, container);
     ctx.drawImage(images[i], container.x, container.y, target.w, target.h);
     // 위치시킨 container 제거
@@ -466,27 +515,21 @@ export function LocateSprite(
       if (intersection) {
         // 곂치는 container 에 대해서 다시 영역 나누기
         DivideSpace(linkedList, intersection, _container);
-        // ctx.drawImage(
-        //   images[i],
-        //   intersection.x,
-        //   intersection.y,
-        //   intersection.w,
-        //   intersection.h,
-        // );
         // 삭제할 LinkedList 컨테이너 Idx 담기
         linkedList.remove(_container);
         console.log('곂쳐진 영역,곂쳐진 컨테이너: ', intersection, _container);
       }
     });
   }
+
   console.log(
     '색칠할 영역-----------------------------------------------------------',
   );
   //container 영역 테스트 코드
   linkedList.foreach((cur, idx) => {
     const _container = cur.item;
-    ctx.fillStyle = getRndColor();
-    ctx.fillRect(_container.x, _container.y, _container.w, _container.h);
+    // ctx.fillStyle = getRndColor();
+    //ctx.fillRect(_container.x, _container.y, _container.w, _container.h);
     console.log(
       'index : ',
       idx,
@@ -497,20 +540,4 @@ export function LocateSprite(
     );
   });
   console.log('-----------------------------------------------------------');
-  // linkedList 맨앞의 container에 img 위치시키고 해당 컨테이너 영역 나누기,캔버스 그리고, 컨테이너 제거
-
-  // 위치된 img와 곂치는 컨테이너에 대해서 다시 영역 나누기
-
-  // 나눠진 영역들 통합
-
-  // // 로드된 이미지들을 canvas에 위치 시킴
-  // for (let i = 0; i < images.length; i++) {
-  //   ctx.drawImage(
-  //     images[i],
-  //     100 * i,
-  //     0,
-  //     images[i].naturalWidth,
-  //     images[i].naturalHeight,
-  //   );
-  // }
 }

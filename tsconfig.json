@@ -9,7 +9,8 @@
       "esnext","es5","dom"
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "public/*": ["./public/*"]
     }
   },
   "exclude": ["node_modules"]
