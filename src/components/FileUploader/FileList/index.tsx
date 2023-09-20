@@ -1,6 +1,6 @@
 import './FileList.css';
 import { useAtom } from 'jotai/index';
-import { FilesAtom } from '@/atoms/FileUploader/atoms';
+import { FilesAtom } from '@/atoms/atoms';
 import { Delete_icon } from 'public/assets/svg/delete_icon';
 export const FileList = () => {
   const [files, setFiles] = useAtom(FilesAtom);

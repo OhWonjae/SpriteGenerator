@@ -1,5 +1,8 @@
-import { Rect } from '@/types/common';
-export function LoadImage(src: string): Promise<HTMLImageElement> {
+import { Rect, RectForCss } from '@/types/common';
+export function LoadImage(
+  src: string,
+  name: string,
+): Promise<HTMLImageElement> {
   // image onLoad 동기화 기능
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -7,6 +10,7 @@ export function LoadImage(src: string): Promise<HTMLImageElement> {
       resolve(img);
     };
     img.src = src;
+    img.id = name;
   });
 }
 
@@ -284,8 +288,8 @@ export function LocateSprite(
   initCanvasHeight: number,
   _ctx: CanvasRenderingContext2D,
   images: HTMLImageElement[],
-  bg: HTMLImageElement,
-) {
+): RectForCss[] {
+  const drawImages: RectForCss[] = [];
   let ctx = _ctx;
   let canvasWidth = initCanvasWidth;
   let canvasHeight = initCanvasHeight;
@@ -492,7 +496,8 @@ export function LocateSprite(
         target.y = container.y;
       }
       const newCanvasCtx = ctx.canvas.getContext('2d');
-      newCanvasCtx.drawImage(bg, 0, 0, canvasWidth, canvasHeight);
+      newCanvasCtx.fillStyle = '#525050';
+      newCanvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
       newCanvasCtx.putImageData(prevCtxImageData, 0, 0);
       ctx = newCanvasCtx;
     } else {
@@ -504,6 +509,14 @@ export function LocateSprite(
     console.log('before DivideSpace', target, container);
 
     DivideSpace(linkedList, target, container);
+    console.log('imaeg@@', images[i].id, images[i].name);
+    drawImages.push({
+      name: images[i].id,
+      x: container.x,
+      y: container.y,
+      w: target.w,
+      h: target.h,
+    });
     ctx.drawImage(images[i], container.x, container.y, target.w, target.h);
     // 위치시킨 container 제거
     linkedList.remove(container);
@@ -540,4 +553,5 @@ export function LocateSprite(
     );
   });
   console.log('-----------------------------------------------------------');
+  return drawImages;
 }

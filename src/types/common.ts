@@ -8,3 +8,7 @@ export interface Rect {
   w: number;
   h: number;
 }
+
+export interface RectForCss extends Rect {
+  name: string;
+}

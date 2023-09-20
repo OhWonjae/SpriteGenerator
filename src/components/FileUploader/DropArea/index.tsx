@@ -1,6 +1,6 @@
 import './DropArea.css';
 import uploaderImg from '/public/assets/uploader_icon.png';
-import { FilesAtom } from '@/atoms/FileUploader/atoms';
+import { FilesAtom } from '@/atoms/atoms';
 import { useAtom } from 'jotai';
 import { ChangeEvent } from 'react';
 import { v4 } from 'uuid';
