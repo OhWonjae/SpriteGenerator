@@ -25,6 +25,25 @@
 > 출력된 Output StyleSheet 내용을 복사 후 해당 클래스를 적용해 줍니다.
 <img width="1008" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/b139ae4e-af98-46e5-ada4-eed85b3c3b64">
 
+# MaxRects Algorithm
+
+## Reference
+> Sprite 배치 알고리즘 - Maxrects (https://tibyte.kr/240)
+
+## 1. 배치 할 수 있는 영역 확인
+> 영역안에 들어갈 수 있는 이미지가 없다면 가장 처음 만들어진 영역을 선택합니다.
+> 만약 영역이 없다면 영역 자체의 크기를 늘려줍니다.
+<img width="851" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/af88fa5d-0cf7-4318-b475-e531dd5d9117">
+
+## 2. 이미지 배치 후 해당 영역 다시 나누기
+> 배치된 이미지와 곂치는 영역을 확인 후 이미지의 상하좌우로 영역을 다시 나눠줍니다.
+> 이과정에서 기존 영역에 포함되거나 새로 만들어진 영역끼리 포함관계가 있으면 포함된 영역을 제거해 줍니다.
+<img width="1205" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/1de74261-66ba-4d04-a71c-978ed4058066">
+ 
+
+
+
+
 
 
 
@@ -44,5 +63,4 @@
 > webpack v5
 > Jest
 
-## Reference
-> Sprite 배치 알고리즘 - Maxrects (https://tibyte.kr/240)
+
