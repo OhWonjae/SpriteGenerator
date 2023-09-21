@@ -17,6 +17,11 @@
 > Drag & Drop / 파일탐색기로 원하는 이미지를 삽입할 수 있습니다. 
 <img width="921" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/2f258042-e90f-4f97-a5d5-bfbe16514d26">
 
+## 1. 이미지 삭제
+> 스프라이트에서 삭제하고 싶은 이미지를 삭제할 수 있습니다. 
+<img width="755" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/27ec466c-5b11-46b4-ba97-e08f2c883216">
+
+
 ## 2. 만들어진 스프라이트 이미지 다운로드
 > 삽입된 이미지의 스프라이트를 확인 후 Download Image 버튼을 눌러줍니다.
 <img width="1255" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/b5042faa-fc35-409f-820d-b1dfe431a235">
@@ -31,14 +36,26 @@
 > Sprite 배치 알고리즘 - Maxrects (https://tibyte.kr/240)
 
 ## 1. 배치 할 수 있는 영역 확인
-> 영역안에 들어갈 수 있는 이미지가 없다면 가장 처음 만들어진 영역을 선택합니다.
+> Rect의 좌표가 (0,0)에 가장가까운 영역을 선택합니다.
+
 > 만약 영역이 없다면 영역 자체의 크기를 늘려줍니다.
 <img width="851" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/af88fa5d-0cf7-4318-b475-e531dd5d9117">
 
+
 ## 2. 이미지 배치 후 해당 영역 다시 나누기
 > 배치된 이미지와 곂치는 영역을 확인 후 이미지의 상하좌우로 영역을 다시 나눠줍니다.
+
 > 이과정에서 기존 영역에 포함되거나 새로 만들어진 영역끼리 포함관계가 있으면 포함된 영역을 제거해 줍니다.
 <img width="1205" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/1de74261-66ba-4d04-a71c-978ed4058066">
+
+## 3. 배치할 이미지가 있으면 1로
+
+## 이미지의 크기별로 정렬 후 배치
+> 큰 이미지를 먼저 배치하여 공간 적재율을 높였습니다.
+<img width="1205" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/b6d54a2d-0052-4b50-8c78-eb7511295fe9">
+
+
+
  
 
 
