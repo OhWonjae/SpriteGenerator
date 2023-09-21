@@ -13,12 +13,21 @@
 
 # How to Use
 
-
-
-
 ## 1. 이미지 삽입
-> 원하는 이미지를 삽입할 수 있습니다.
-> 
+> Drag & Drop / 파일탐색기로 원하는 이미지를 삽입할 수 있습니다. 
+<img width="921" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/2f258042-e90f-4f97-a5d5-bfbe16514d26">
+
+## 2. 만들어진 스프라이트 이미지 다운로드
+> 삽입된 이미지의 스프라이트를 확인 후 Download Image 버튼을 눌러줍니다.
+<img width="1255" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/b5042faa-fc35-409f-820d-b1dfe431a235">
+
+## 3. 다운받은 스프라이트 이미지 사용
+> 출력된 Output StyleSheet 내용을 복사 후 해당 클래스를 적용해 줍니다.
+<img width="1008" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/b139ae4e-af98-46e5-ada4-eed85b3c3b64">
+
+
+
+
 
 
 
