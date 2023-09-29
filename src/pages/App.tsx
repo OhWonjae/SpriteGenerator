@@ -2,6 +2,7 @@ import { Container } from '@/components/Container';
 import { ContainerInner } from '@/components/ContainerInner';
 import { FileUploader } from '@/components/FileUploader';
 import { SpriteArea } from '@/components/SpriteArea';
+import { OutputArea } from '@/components/OutputArea';
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <ContainerInner>
         <FileUploader />
         <SpriteArea />
+        <OutputArea />
       </ContainerInner>
     </Container>
   );

@@ -1,6 +1,7 @@
 .container-inner{
     border: black solid 1px;
     min-height: 600px;
-    height:600px
+    height:600px;
+    margin: 0 190px
 }
 
