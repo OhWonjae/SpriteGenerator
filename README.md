@@ -62,6 +62,8 @@
 ## 기술 스택
 
 > React v18
+>
+> 순수 CSS
 > 
 > Typescript
 > 
