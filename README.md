@@ -36,7 +36,7 @@
 # MaxRects Algorithm
 
 ## Reference
-> Sprite 배치 알고리즘 - Maxrects (https://tibyte.kr/240)
+> Sprite 배치 알고리즘 - Maxrects (https://tibyte.kr/240) 해당 레퍼런스 참고하여 직접 구현하였습니다.
 
 ## 1. 배치 할 수 있는 영역 확인
 > Rect의 좌표가 (0,0)에 가장가까운 영역을 선택합니다.
