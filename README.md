@@ -54,30 +54,17 @@
 > 큰 이미지를 먼저 배치하여 공간 적재율을 높였습니다.
 <img width="1205" alt="image" src="https://github.com/OhWonjae/SpriteGenerator/assets/43844233/b6d54a2d-0052-4b50-8c78-eb7511295fe9">
 
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 기술 스택
 
 > React v18
+> 
 > Typescript
+> 
 > webpack v5
+> 
 > Jest
 
-
+## 배포
+> AWS S3
+> 
+> AWS CLOUD FRONT
