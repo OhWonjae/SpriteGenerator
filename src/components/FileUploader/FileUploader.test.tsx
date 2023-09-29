@@ -1,8 +1,6 @@
 import { FileUploader } from './index';
-import { FileList } from './FileList';
 import React from 'react';
-import { render, getByText, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 describe('FileUploader Test', () => {
   let _container: HTMLElement | null = null;

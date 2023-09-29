@@ -6,15 +6,23 @@ import { useEffect, useRef, useState } from 'react';
 import { LoadImage, LocateSprite } from '@/helpers/common';
 export const SpriteArea = () => {
   const cRef = useRef<HTMLCanvasElement | null>(null);
-  const [files, setFiles] = useAtom(FilesAtom);
-  const [drawImages, setDrawImages] = useAtom(DrawImagesAtom);
-  const [canvasAtom, setCanvasAtom] = useAtom(CanvasAtom);
+  const [files] = useAtom(FilesAtom);
+  const [, setDrawImages] = useAtom(DrawImagesAtom);
+  const [, setCanvasAtom] = useAtom(CanvasAtom);
   const handleRenderCanvas = async (canvasRef: HTMLCanvasElement) => {
     const ctx = canvasRef.getContext('2d');
+
     const images: HTMLImageElement[] = [];
     for (let i = 0; i < files.length; i++) {
+      console.log('files!!!222', files[i]);
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        console.log('read!!', e.target.result);
+      };
+      reader.readAsBinaryString(files[i]);
       const BlobUrl = URL.createObjectURL(files[i]);
-      const img = await LoadImage(BlobUrl, files[i].name);
+      console.log('bloburl', BlobUrl);
+      const img = await LoadImage(BlobUrl, files[i].name, files[i].id);
       images.push(img);
     }
     images.sort((a, b) => {
@@ -37,7 +45,7 @@ export const SpriteArea = () => {
     if (cRef.current) {
       const canvasRef = cRef.current;
       if (canvasRef) {
-        handleRenderCanvas(canvasRef);
+        handleRenderCanvas(canvasRef).catch((err) => {});
       }
     }
   }, [files]);

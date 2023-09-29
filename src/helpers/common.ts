@@ -2,6 +2,7 @@ import { Rect, RectForCss } from '@/types/common';
 export function LoadImage(
   src: string,
   name: string,
+  id: string,
 ): Promise<HTMLImageElement> {
   // image onLoad 동기화 기능
   return new Promise((resolve, reject) => {
@@ -10,7 +11,8 @@ export function LoadImage(
       resolve(img);
     };
     img.src = src;
-    img.id = name;
+    img.id = id;
+    img.title = name;
   });
 }
 
@@ -509,9 +511,9 @@ export function LocateSprite(
     console.log('before DivideSpace', target, container);
 
     DivideSpace(linkedList, target, container);
-    console.log('imaeg@@', images[i].id, images[i].name);
     drawImages.push({
-      name: images[i].id,
+      id: images[i].id,
+      name: images[i].title,
       x: container.x,
       y: container.y,
       w: target.w,

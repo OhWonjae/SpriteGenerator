@@ -1,12 +1,16 @@
 import './FileList.css';
 import { useAtom } from 'jotai/index';
-import { FilesAtom } from '@/atoms/atoms';
-import { Delete_icon } from 'public/assets/svg/delete_icon';
+import { DrawImagesAtom, FilesAtom } from '@/atoms/atoms';
+import { Delete_icon } from '@/../public/assets/svg/delete_icon';
 export const FileList = () => {
   const [files, setFiles] = useAtom(FilesAtom);
+  const [, setDrawImages] = useAtom(DrawImagesAtom);
   const handleOnDeleteFile = (fileId: string) => {
     setFiles((files) => {
       return files.filter((f) => f.id !== fileId);
+    });
+    setDrawImages((images) => {
+      return images.filter((f) => f.id !== fileId);
     });
   };
   return (

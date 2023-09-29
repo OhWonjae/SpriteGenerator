@@ -1,10 +1,11 @@
 import './OutputArea.css';
 import { useAtom } from 'jotai';
-import { useEffect, useRef } from 'react';
+import React from 'react';
 import { CanvasAtom, DrawImagesAtom } from '@/atoms/atoms';
 export const OutputArea = () => {
-  const [drawImages, setDrawImages] = useAtom(DrawImagesAtom);
-  const [canvasAtom, setCanvasAtom] = useAtom(CanvasAtom);
+  const [drawImages] = useAtom(DrawImagesAtom);
+  const [canvasAtom] = useAtom(CanvasAtom);
+  console.log('drawdImage', drawImages);
   return (
     <div className={'output-area'}>
       <div className={'output-title'}>
@@ -27,7 +28,9 @@ export const OutputArea = () => {
               '.sprite {\n\tbackground-image: url(sprite.png);\n\tbackground-repeat: no-repeat;\n\tdisplay: block;\n}\n'
             }
             {drawImages.map((d) => (
-              <>{`.sprite-${d.name} {\n\twidth: ${d.w}px;\n\theight: ${d.h}px;\n\tbackground-position: -${d.x}px -${d.y}px;\n}\n`}</>
+              <React.Fragment
+                key={d.id}
+              >{`.sprite-${d.name} {\n\twidth: ${d.w}px;\n\theight: ${d.h}px;\n\tbackground-position: -${d.x}px -${d.y}px;\n}\n`}</React.Fragment>
             ))}
           </>
         )}

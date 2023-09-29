@@ -5,11 +5,14 @@
   "author": "ohwonjae <hdnjswo5000@douzone.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode development",
-    "dev": "webpack serve",
+    "build": "env-cmd -f .env.production webpack --config webpack.prod.js",
+    "dev": "env-cmd -f .env.development webpack serve --open --config webpack.dev.js",
     "test": "jest -c jest.config.js"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "env-cmd": "^10.1.0",
     "jotai": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -40,6 +43,7 @@
     "html-webpack-plugin": "^5.5.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.6.4",
+    "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^29.6.4",
     "prettier": "^3.0.3",
     "style-loader": "^3.3.3",
@@ -50,6 +54,7 @@
     "typescript": "^5.2.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.9.0"
   }
 }

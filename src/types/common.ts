@@ -11,4 +11,5 @@ export interface Rect {
 
 export interface RectForCss extends Rect {
   name: string;
+  id: string;
 }
