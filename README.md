@@ -80,5 +80,4 @@
 ## License
 
 [The MIT License (MIT)](http://opensource.org/licenses/MIT)
-
-Copyrighted fonts are not subjected to this License.
+Copyright (c) 2023 OhWonjae
