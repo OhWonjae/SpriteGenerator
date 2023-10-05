@@ -34,7 +34,7 @@ export const SpriteArea = () => {
     ctx.canvas.height = 600;
     ctx.canvas.style.width = 1076 + 'px';
     ctx.canvas.style.height = 600 + 'px';
-    ctx.fillStyle = '#525050';
+    ctx.fillStyle = 'transparent';
     ctx.fillRect(0, 0, 1076, 600);
     const drawImages = LocateSprite(1076, 600, ctx, images);
     setDrawImages(drawImages);
