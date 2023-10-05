@@ -498,7 +498,7 @@ export function LocateSprite(
         target.y = container.y;
       }
       const newCanvasCtx = ctx.canvas.getContext('2d');
-      newCanvasCtx.fillStyle = '#525050';
+      newCanvasCtx.fillStyle = 'transparent';
       newCanvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
       newCanvasCtx.putImageData(prevCtxImageData, 0, 0);
       ctx = newCanvasCtx;
