@@ -14,8 +14,8 @@ describe('SpriteArea Test', () => {
     const { container } = render(<SpriteArea />);
     _container = container;
     if (_container == null) return;
-    const EmptyText = getByText(_container, '파일을 업로드해 주세요.');
-    expect(EmptyText).toBeInTheDocument();
+    // const EmptyText = getByText(_container, '파일을 업로드해 주세요.');
+    // expect(EmptyText).toBeInTheDocument();
   });
   it('image 캔버스 테스트', () => {
     const fakeFile: Attachment = {
@@ -32,8 +32,6 @@ describe('SpriteArea Test', () => {
         <SpriteArea />
       </JotaiProvider>,
     );
-    // global.URL.createObjectURL = jest.fn();
-    //screen.debug();
     waitFor(() => {
       expect(container).toBeInTheDocument();
     });

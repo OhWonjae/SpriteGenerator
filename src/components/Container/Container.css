@@ -1,10 +1,13 @@
 .container {
     padding:10px;
     min-height: 600px;
-    min-width:1920px
+    min-width:1440px
 }
 
 .container > .container-title{
+    margin:5px 190px;
+    display: flex;
+    justify-content: space-between;
     text-align: center;
     font-size: 2rem;
     font-weight: bold;

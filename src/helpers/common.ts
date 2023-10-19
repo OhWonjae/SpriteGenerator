@@ -54,15 +54,12 @@ class LinkedRectList {
       let current = this.head;
       let result = current.item;
       if (condition(target, current.item)) {
-        console.log('select container', target, current.item);
-        isSelect = true;
         return result;
       }
 
       while (current.next) {
         const container = current.next.item;
         if (condition(target, container)) {
-          console.log('select container', target, container);
           isSelect = true;
           result = container;
           break;
@@ -113,7 +110,6 @@ class LinkedRectList {
   append(item: Rect) {
     // 추가될때 컨테이너의 x,y가 0과 가까운 순으로 정렬해서 추가해주기 sqrt(x^2 + y^2)
     const itemDistance = Math.sqrt(Math.pow(item.x, 2) + Math.pow(item.y, 2));
-    console.log('timeDistance', itemDistance);
     let current = this.head;
     let pre = null;
     const newNode = new Node(item);
@@ -205,9 +201,6 @@ function DivideSpace(
 ) {
   // 파라미터로 받은 target 을 container 의 기준으로 영역 나눠서 링크드 리스트에 추기하기.
   // 오른쪽 부터 시계방향으로 linkedList 에 추가
-  console.log(
-    'DivideSpace() 추가되는 영역---------------------------------------------------------',
-  );
   const right: Rect = {
     x: target.x + target.w,
     y: container.y,
@@ -244,16 +237,9 @@ function DivideSpace(
   if (top.w > 0 && top.h > 0) {
     linkedListRef.append(top);
   }
-  linkedListRef.traverse();
-  console.log('---------------------------------------------------------');
 }
 
 function isIntersection(target1: Rect, target2: Rect) {
-  console.log(
-    'Intersection---------------------------------------------------------',
-  );
-  console.log('target1', target1);
-  console.log('target2', target2);
   // 두 영역이 곂치는지 확인 후 곂치지 않으면 null, 곂치면 곂치는 영역 리턴
   if (target1.x >= target2.x + target2.w) {
     return null;
@@ -273,8 +259,6 @@ function isIntersection(target1: Rect, target2: Rect) {
     w: Math.min(target1.x + target1.w, target2.x + target2.w),
     h: Math.min(target1.y + target1.h, target2.y + target2.h),
   };
-  console.log('Intersection Rect', rect);
-  console.log('---------------------------------------------------------');
   return rect;
 }
 
@@ -300,11 +284,13 @@ export function LocateSprite(
   linkedList.append(initRect);
   for (let i = 0; i < images.length; i++) {
     const target = ImgToRect(images[i]);
-    console.log('target : ', target);
+    // target 영역을 포함할 수 있는 영역 찾기
     let container = linkedList.getContainer(target, getContainerCondition);
-    console.log('getContainer : ', container);
+
     const prevCtxImageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+
     if (!container) {
+      // 없으면 첫번째 영역 가져오기
       container = linkedList.getFirst();
       console.log('getFirst() : ', container);
       console.log('canvasWidth, canvasHeight : ', canvasWidth, canvasHeight);
@@ -519,10 +505,10 @@ export function LocateSprite(
       w: target.w,
       h: target.h,
     });
+    // 이미지 그리기
     ctx.drawImage(images[i], container.x, container.y, target.w, target.h);
     // 위치시킨 container 제거
     linkedList.remove(container);
-    console.log('위치시킨 컨테이너 삭제하기 : ', container);
     // 그려진 이미지와 곂치는 컨테이너 있는지 확인
     linkedList.foreach((cur, idx) => {
       const _container = cur.item;
@@ -532,7 +518,6 @@ export function LocateSprite(
         DivideSpace(linkedList, intersection, _container);
         // 삭제할 LinkedList 컨테이너 Idx 담기
         linkedList.remove(_container);
-        console.log('곂쳐진 영역,곂쳐진 컨테이너: ', intersection, _container);
       }
     });
   }
