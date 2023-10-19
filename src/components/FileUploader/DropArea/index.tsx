@@ -38,10 +38,10 @@ export const DropArea = () => {
             return;
           }
         }
-        console.log('dropEvnet', [...files, ...e.dataTransfer.files]);
         const arr = [...e.dataTransfer.files] as Attachment[];
         for (const file of arr) {
           const id = v4();
+          // 파일에 아이디 부여
           file.id = id;
         }
         setFiles((f) => {

@@ -1,13 +1,22 @@
 import './OutputArea.css';
 import { useAtom } from 'jotai';
-import React from 'react';
+import React, { useState } from 'react';
+import { Empty } from '@/components/Empty';
 import { CanvasAtom, DrawImagesAtom } from '@/atoms/atoms';
 export const OutputArea = () => {
   const [drawImages] = useAtom(DrawImagesAtom);
   const [canvasAtom] = useAtom(CanvasAtom);
-  console.log('drawdImage', drawImages);
+  if (drawImages.length === 0) {
+    return <></>;
+  }
   return (
-    <div className={'output-area'}>
+    <div
+      className={`output-area`}
+      onDragOver={(e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'none';
+      }}
+    >
       <div className={'output-title'}>
         Output StyleSheet
         {drawImages.length > 0 && (

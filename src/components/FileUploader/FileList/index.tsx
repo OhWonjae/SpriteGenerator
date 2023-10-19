@@ -14,7 +14,13 @@ export const FileList = () => {
     });
   };
   return (
-    <div className={'file-list'}>
+    <div
+      className={'file-list'}
+      onDragOver={(e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'none';
+      }}
+    >
       <table className={'file-list-table'}>
         <colgroup>
           <col width="60%" />

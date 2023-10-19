@@ -1,8 +1,8 @@
 import './SpriteArea.css';
-import { Empty } from './Empty';
+import { Empty } from '@/components/Empty';
 import { useAtom } from 'jotai';
 import { FilesAtom, DrawImagesAtom, CanvasAtom } from '@/atoms/atoms';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { LoadImage, LocateSprite } from '@/helpers/common';
 export const SpriteArea = () => {
   const cRef = useRef<HTMLCanvasElement | null>(null);
@@ -14,14 +14,7 @@ export const SpriteArea = () => {
 
     const images: HTMLImageElement[] = [];
     for (let i = 0; i < files.length; i++) {
-      console.log('files!!!222', files[i]);
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        console.log('read!!', e.target.result);
-      };
-      reader.readAsBinaryString(files[i]);
       const BlobUrl = URL.createObjectURL(files[i]);
-      console.log('bloburl', BlobUrl);
       const img = await LoadImage(BlobUrl, files[i].name, files[i].id);
       images.push(img);
     }
@@ -30,13 +23,13 @@ export const SpriteArea = () => {
         b.naturalWidth + b.naturalHeight - (a.naturalWidth + a.naturalHeight)
       );
     });
-    ctx.canvas.width = 1076;
+    ctx.canvas.width = 740;
     ctx.canvas.height = 600;
-    ctx.canvas.style.width = 1076 + 'px';
+    ctx.canvas.style.width = 740 + 'px';
     ctx.canvas.style.height = 600 + 'px';
     ctx.fillStyle = 'transparent';
-    ctx.fillRect(0, 0, 1076, 600);
-    const drawImages = LocateSprite(1076, 600, ctx, images);
+    ctx.fillRect(0, 0, 740, 600);
+    const drawImages = LocateSprite(740, 600, ctx, images);
     setDrawImages(drawImages);
     setCanvasAtom(cRef.current);
   };
@@ -51,12 +44,15 @@ export const SpriteArea = () => {
   }, [files]);
   return (
     <div className={'sprite-area'}>
-      {files.length > 0 ? (
-        <>
+      {files.length > 0 && (
+        <div
+          onDragOver={(e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'none';
+          }}
+        >
           <canvas className={'sprite-canvas-area'} ref={cRef}></canvas>
-        </>
-      ) : (
-        <Empty />
+        </div>
       )}
     </div>
   );

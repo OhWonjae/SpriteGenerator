@@ -7,7 +7,17 @@ interface IContainerProps {
 export const Container = ({ title, children }: IContainerProps) => {
   return (
     <div className={'container'}>
-      <div className={'container-title'}>{title || 'Sprite Generator'}</div>
+      <div className={'container-title'}>
+        <div></div>
+        <div>{title || 'Sprite Generator'}</div>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={'https://github.com/OhWonjae/SpriteGenerator'}
+        >
+          <img src={'public/assets/github.png'} width={36} height={36} />
+        </a>
+      </div>
       {children}
     </div>
   );
