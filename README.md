@@ -5,6 +5,9 @@
 
 [coverage-badge-green]: https://img.shields.io/badge/Coverage-90%25-brightgreen.svg
 -----------------------
+
+Blog 정리 - https://dhdnjswo5000.tistory.com/72
+
 # Description
 이미지 스프라이트(image sprite)란 여러 개의 이미지를 하나의 이미지로 합쳐서 관리하는 이미지를 의미합니다.
 
