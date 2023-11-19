@@ -1,5 +1,5 @@
 # Sprite Generator 👵👴
-# 이미지를 업로드하면 해당 이미지들을 하나로 모아서 다운받을 수 있게 해줍니다. (https://d2nsgx8f0wx4a.cloudfront.net/](https://sprite.ohwonjae.site/)
+# 이미지를 업로드하면 해당 이미지들을 하나로 모아서 다운받을 수 있게 해줍니다. (https://sprite.ohwonjae.site/)
 
 ![Coverage badge gree][coverage-badge-green]
 
