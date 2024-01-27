@@ -13,3 +13,9 @@
     font-weight: bold;
 }
 
+.logo {
+    cursor: pointer;
+    height: 40px;
+    margin-right: 20px;
+    text-align: center;
+}

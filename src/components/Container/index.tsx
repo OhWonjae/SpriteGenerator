@@ -1,5 +1,5 @@
 import './Container.css';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 interface IContainerProps {
   title?: string;
   children?: ReactNode;
@@ -8,7 +8,7 @@ export const Container = ({ title, children }: IContainerProps) => {
   return (
     <div className={'container'}>
       <div className={'container-title'}>
-        <div></div>
+        <img className={'logo'} src={'public/assets/logo.png'} />
         <div>{title || 'Sprite Generator'}</div>
         <a
           target="_blank"
